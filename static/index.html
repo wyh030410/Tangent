@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tangent - Multi-thread Chat</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Main thread -->
+        <div class="main-thread">
+            <div class="chat-header">
+                <h2>Main Thread</h2>
+                <button id="searchBtn" class="search-btn">🔍 Web Search</button>
+            </div>
+            <div id="mainMessages" class="messages"></div>
+            <div class="input-area">
+                <textarea id="mainInput" placeholder="Type your message..."></textarea>
+                <button id="mainSend">Send</button>
+            </div>
+        </div>
+
+        <!-- Bubble threads container -->
+        <div id="bubbles" class="bubbles-container"></div>
+    </div>
+
+    <!-- Bubble template -->
+    <template id="bubbleTemplate">
+        <div class="bubble">
+            <div class="bubble-header">
+                <span class="bubble-title">Bubble Thread</span>
+                <button class="close-bubble">×</button>
+            </div>
+            <div class="bubble-messages"></div>
+            <div class="bubble-input-area">
+                <textarea class="bubble-input" placeholder="Ask details..."></textarea>
+                <button class="bubble-send">Send</button>
+            </div>
+        </div>
+    </template>
+
+    <script src="app.js"></script>
+</body>
+</html>

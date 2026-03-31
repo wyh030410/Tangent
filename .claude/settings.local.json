@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p static)",
+      "Bash(touch app.py .env requirements.txt static/index.html static/style.css static/app.js)",
+      "Bash(pip install -r requirements.txt)",
+      "Bash(pip install --upgrade pip)",
+      "Bash(python app.py)",
+      "Bash(pip --version)",
+      "Bash(python -m pip install -r requirements.txt)",
+      "Bash(where python)",
+      "Bash(D:condapython.exe app.py)",
+      "Bash(\"/d/conda/python.exe\" app.py)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
