@@ -10,7 +10,8 @@
       "Bash(python -m pip install -r requirements.txt)",
       "Bash(where python)",
       "Bash(D:condapython.exe app.py)",
-      "Bash(\"/d/conda/python.exe\" app.py)"
+      "Bash(\"/d/conda/python.exe\" app.py)",
+      "Bash(git add .)"
     ],
     "deny": [],
     "ask": []
