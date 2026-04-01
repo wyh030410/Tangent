@@ -11,7 +11,11 @@
       "Bash(where python)",
       "Bash(D:condapython.exe app.py)",
       "Bash(\"/d/conda/python.exe\" app.py)",
-      "Bash(git add .)"
+      "Bash(git add .)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nInitial release: Multi-thread chat with Claude\n\nFeatures:\n- Main thread and isolated bubble threads\n- Streaming AI responses\n- Manual web search via Tavily API\n- Create bubble threads from any AI response\nEOF\n)\")",
+      "Bash(git push)",
+      "Bash(\"/d/conda/python.exe\" -m pip install pandas openpyxl PyPDF2 Pillow)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nAdd ChatGPT-style UI and file upload feature\n\nFeatures:\n- ChatGPT-style dark theme UI\n- Sidebar with chat history\n- New chat button\n- localStorage for persistent history\n- File upload support (images, Excel, PDF, TXT)\n- Attach button with file preview\n- Tangent logo in sidebar\nEOF\n)\")"
     ],
     "deny": [],
     "ask": []

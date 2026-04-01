@@ -8,16 +8,36 @@
 </head>
 <body>
     <div class="container">
-        <!-- Main thread -->
-        <div class="main-thread">
-            <div class="chat-header">
-                <h2>Main Thread</h2>
-                <button id="searchBtn" class="search-btn">🔍 Web Search</button>
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">Tangent</div>
+                <button class="new-chat-btn" id="newChatBtn">
+                    <span>+</span>
+                    <span>New chat</span>
+                </button>
             </div>
-            <div id="mainMessages" class="messages"></div>
-            <div class="input-area">
-                <textarea id="mainInput" placeholder="Type your message..."></textarea>
-                <button id="mainSend">Send</button>
+            <div class="chat-history" id="chatHistory">
+                <!-- History items will be added here -->
+            </div>
+        </div>
+
+        <!-- Main area -->
+        <div class="main-area">
+            <div class="main-thread">
+                <div class="chat-header">
+                    <h2>Main Thread</h2>
+                    <button id="searchBtn" class="search-btn">🔍 Web Search</button>
+                </div>
+                <div id="mainMessages" class="messages"></div>
+                <div class="input-area">
+                    <div class="input-wrapper">
+                        <input type="file" id="fileInput" accept=".png,.jpg,.jpeg,.gif,.webp,.xlsx,.xls,.pdf,.txt" style="display:none">
+                        <button id="attachBtn" class="attach-btn">📎</button>
+                        <textarea id="mainInput" placeholder="Message Claude..." rows="1"></textarea>
+                        <button id="mainSend">↑</button>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -34,8 +54,10 @@
             </div>
             <div class="bubble-messages"></div>
             <div class="bubble-input-area">
-                <textarea class="bubble-input" placeholder="Ask details..."></textarea>
-                <button class="bubble-send">Send</button>
+                <div class="bubble-input-wrapper">
+                    <textarea class="bubble-input" placeholder="Ask details..." rows="1"></textarea>
+                    <button class="bubble-send">↑</button>
+                </div>
             </div>
         </div>
     </template>

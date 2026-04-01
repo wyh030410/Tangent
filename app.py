@@ -1,9 +1,14 @@
 import os
+import base64
 from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 from anthropic import Anthropic
 from tavily import TavilyClient
 from dotenv import load_dotenv
+import pandas as pd
+from PyPDF2 import PdfReader
+from PIL import Image
+import io
 
 load_dotenv()
 
@@ -38,6 +43,71 @@ def chat():
                     yield f"data: {text}\n\n"
 
         return app.response_class(generate(), mimetype='text/event-stream')
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'error': str(e)
+        }), 500
+
+@app.route('/api/upload', methods=['POST'])
+def upload_file():
+    """File upload interface"""
+    try:
+        if 'file' not in request.files:
+            return jsonify({'success': False, 'error': 'No file'}), 400
+
+        file = request.files['file']
+        filename = file.filename.lower()
+
+        # Process image
+        if filename.endswith(('.png', '.jpg', '.jpeg', '.gif', '.webp')):
+            image_data = base64.b64encode(file.read()).decode('utf-8')
+            media_type = f"image/{filename.split('.')[-1]}"
+            if media_type == 'image/jpg':
+                media_type = 'image/jpeg'
+
+            return jsonify({
+                'success': True,
+                'type': 'image',
+                'data': image_data,
+                'media_type': media_type
+            })
+
+        # Process Excel
+        elif filename.endswith(('.xlsx', '.xls')):
+            df = pd.read_excel(file)
+            text = df.to_string(index=False)
+            return jsonify({
+                'success': True,
+                'type': 'text',
+                'content': f"[Excel Content]\n{text}"
+            })
+
+        # Process PDF
+        elif filename.endswith('.pdf'):
+            pdf = PdfReader(file)
+            text = "\n".join([page.extract_text() for page in pdf.pages])
+            return jsonify({
+                'success': True,
+                'type': 'text',
+                'content': f"[PDF Content]\n{text}"
+            })
+
+        # Process text
+        elif filename.endswith('.txt'):
+            text = file.read().decode('utf-8')
+            return jsonify({
+                'success': True,
+                'type': 'text',
+                'content': f"[Text File]\n{text}"
+            })
+
+        else:
+            return jsonify({
+                'success': False,
+                'error': 'Unsupported file type'
+            }), 400
+
     except Exception as e:
         return jsonify({
             'success': False,
